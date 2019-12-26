@@ -1,0 +1,58 @@
+<h1>Listado de Categorias</h1>
+<hr>
+<div class="row">
+    <div class="col text-right">
+        <button routerLink="/category/nuevo" class="btn btn-primary">
+            <i class=""></i>
+            agregar
+        </button>
+    </div>
+</div>
+
+<table *ngIf="!cargando" class="table table-striped animated fadeIn faster">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre Categoria</th>
+            <th scope="col">descripcion</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let categoiry of categories; let i = index">
+            <td>{{categoiry.idCategoiry}}</td>
+            <td>{{categoiry.name}}</td>
+            <td>{{categoiry.description}}</td>
+
+            <td>
+                <button class="btn btn-info mr-1" [routerLink]="['/category',categoiry.idCategoiry]">
+                    <span class="glyphicon glyphicon-penci"></span>
+                </button>
+                <button class="btn btn-danger mr-1" (click)="deleteCategory(category,i)">
+                    <span class="glyphicon glyphicon-trash" ></span>
+                </button>
+            </td>
+
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="!cargando && categories.length==0" class="alert alert alert-warning text-center mt-3 animated fadeIn faster">
+    <h4 class="alert-heading">No hay registros</h4>
+    <p>
+        <i class=" fa fa-exclamation fa-2x"></i>
+    </p>
+    <p class="mb-0">
+        espere porfavor
+    </p>
+</div>
+
+<div *ngIf="cargando" class="alert alert alert-info text-center mt-3 animated fadeIn faster">
+    <h4 class="alert-heading">Cargando</h4>
+    <p>
+        <i class=" fa fa-spinner fa-spin fa-2x"></i>
+    </p>
+    <p class="mb-0">
+        Espere por favor
+    </p>
+</div>
